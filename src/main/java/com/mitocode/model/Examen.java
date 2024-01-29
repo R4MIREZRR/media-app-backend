@@ -39,7 +39,6 @@ public class Examen {
     }
 
     // TODO: 29/01/24 Equals hashCode idExamen -> es para comparar dos clases donde tenegan ambos un campo en comun de comparacion
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

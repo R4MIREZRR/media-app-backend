@@ -1,9 +1,11 @@
 # media-app-backend
 
-### Este commit pertence al video 2
+### Este commit pertence al video 3
 ##
 
-> Se realizo un crud simple con Paciente, ademas se estructuro los package. Se probo desde postman y se registro, elimino, actualizo, etc. Se uso postgresql para el registro.
+> Se creo la estructura de las entidades mapeados con JPA,
+> tambien se ejecuto y se estructuro en la base de datos de postresql, 
+> solo se han creado las tablas y las relaciones entre ellas.
 
 ##### Consideraciones:
 - Debes tener postman

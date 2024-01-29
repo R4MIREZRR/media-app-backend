@@ -12,7 +12,7 @@ public class DetalleConsulta {
 
     @ManyToOne
     @JoinColumn(name = "id_consulta", nullable = false, foreignKey = @ForeignKey(name = "FK_detalle_consulta"))
-    private Paciente paciente;
+    private Consulta consulta;
 
     @Column(name = "diagnostico", nullable = false, length = 70)
     private String diagnostico;
@@ -28,12 +28,12 @@ public class DetalleConsulta {
         this.idDetalle = idDetalle;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Consulta getConsulta() {
+        return consulta;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
     }
 
     public String getDiagnostico() {
