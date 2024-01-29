@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,11 +37,24 @@ public class PacienteController {
 
     }
 
-    // TODO: 29/01/24 @Valid -> Si no lo pones de nada sirven los @Size en los beans ya que no lo reconocera ni lo validara y te devolvera un badRequest 400
+// TODO: 29/01/24 @Valid -> Si no lo pones de nada sirven los @Size en los beans ya que no lo reconocera ni lo validara y te devolvera un badRequest 400
+//    @PostMapping
+//    public ResponseEntity<Paciente> registrar(@Valid @RequestBody Paciente p) throws Exception {
+//        Paciente obj = service.registrar(p);
+//        return new ResponseEntity<Paciente>(obj, HttpStatus.CREATED);
+//    }
+
+
+// TODO: 29/01/24  Utilizando ServletUriComponentsBuilder.fromCurrentRequest(), se obtiene el PATH, luego se construye y expande con el ID del paciente.
+// TODO: 29/01/24  Esta práctica está alineada con el nivel de madurez 2 de Richardson. Según esta teoría, se debe enviar una ruta en el encabezado (header) que permita consultar el registro recién creado. En otras palabras, después de registrar un elemento, se agrega una ruta de consulta para que pueda consultarse posteriormente, pero ya no se devuelve ese registro en el cuerpo (body) de la respuesta.
+// TODO: 29/01/24  Es importante destacar que esta implementación solo es válida para respuestas con el código 201, que corresponde a los registros exitosos. Debes evaluar si esta práctica es necesaria según los requisitos del sistema.
+
     @PostMapping
     public ResponseEntity<Paciente> registrar(@Valid @RequestBody Paciente p) throws Exception {
         Paciente obj = service.registrar(p);
-        return new ResponseEntity<Paciente>(obj, HttpStatus.CREATED);
+        // TODO: 29/01/24 location ->  se arma: http://localhost:8080/pacientes/22 
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdPaciente()).toUri();
+        return  ResponseEntity.created(location).build();
     }
 
     @PutMapping
