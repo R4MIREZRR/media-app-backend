@@ -1,10 +1,14 @@
 package com.mitocode.model;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+// TODO: 29/01/24 Schema -> es para editar documentacion en el swagger  
+@Schema(description = "Paciente model")
 @Entity
 @Table(name = "paciente")
 public class Paciente {
