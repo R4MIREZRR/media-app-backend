@@ -7,6 +7,67 @@
 > REFACTORIZACION 1 - Aqui se agrego  de la impl basica de Medico y todas sus rutas y se probo y funciona
 
 > REFACTORIZACION 2 -Aqui se agrego ICRUD para tener una clase service para las interfaces comunes
+
+> REFACTORIZACION 3 - ICRUDImpl para abstraer los metodos en comun del las implementaciones de los services...
+
+> Se ha logrado la implementación exitosa de las operaciones CRUD para las entidades de Examen, Médico, Especialidad y Consulta, permitiendo la inserción de datos en la base correspondiente excepto Consulta q esta amarrado.
+
+> Se realizo el CRUD simple entre Consulta y detalle de consulta.
+
+> DTO, Consulta, examen detalle. es una clase de apoyo aux para representar informacion q sirve para enviar informacion a un repositorio o bd o poder recuperar algo del repo y pintar una consulta para pimntar de forma mejorada
+```json
+{
+  "paciente": {
+    "idPaciente": 7
+  },
+  "medico": {
+    "idMedico": 2
+  },
+  "especialidad": {
+    "idEspecialidad": 3
+  },
+  "numConsultorio": "C1",
+  "fecha": "2024-01-28T12:30:00",
+  "detalleConsulta": [
+    {
+      "diagnostico": "FIEBRE",
+      "tratamiento": "PARACETAMOL"
+    },
+    {
+      "diagnostico": "AMIGDALITIS",
+      "tratamiento": "ANTIBIOTICO"
+    }
+  ]
+}
+```
+> DTO - Para insertar Consulta - Examen y consulta - detalle. Se maneja transacciones para q si no registra uno no registre todo lo demas.
+```json
+ {
+	"consulta" : {
+		"paciente" : {
+			"idPaciente" : 1
+		},
+		"medico" : {
+			"idMedico" : 1
+		},
+		"especialidad" : {
+			"idEspecialidad" : 1
+		},
+		"numConsultorio" : "C1",
+		"fecha" : "2020-08-22T05:00:00.000Z",
+		"detalleConsulta" : [						
+			{ "diagnostico" : "FIEBRE", "tratamiento" : "PARACETAMOL"},	
+			{ "diagnostico" : "AMIGDALITIS", "tratamiento" : "ANTIBIOTICOS"}
+		]
+	},
+	"lstExamen" : [
+ 		{"idExamen" : 1},
+ 		{"idExamen" : 2}
+ 	]
+		
+}
+```
+
 ### Anteriores Commit
 > Resumen de Práctica en Richardson Maturity Level 2
 En este código, se utiliza ServletUriComponentsBuilder.fromCurrentRequest() para obtener el PATH actual y luego se construye y expande con el ID del paciente. Esta práctica está alineada con el nivel de madurez 2 de Richardson. Según esta teoría, se adopta la práctica de enviar una ruta en el encabezado (header) que permita consultar el registro recién creado.
@@ -41,3 +102,4 @@ En este código, se utiliza ServletUriComponentsBuilder.fromCurrentRequest() par
 | Spring Framework | 5.3.3 |
 | Tomcat 9.0 | Servlet 4.0 |
 | Java | 11 |
+

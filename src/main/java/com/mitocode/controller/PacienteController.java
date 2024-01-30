@@ -34,7 +34,7 @@ public class PacienteController {
     @GetMapping("/{id}")
     public ResponseEntity<Paciente> listarPorId(@PathVariable("id") Integer id) throws Exception {
         Paciente obj = service.listarPorId(id);
-        if (obj.getIdPaciente() == null){
+        if (obj == null){
             throw new ModeloNotFoundException("ID NO ENCONTRADO " +  id);
         }
         return new ResponseEntity<Paciente>(obj, HttpStatus.OK);

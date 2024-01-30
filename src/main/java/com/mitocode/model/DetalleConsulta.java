@@ -1,5 +1,7 @@
 package com.mitocode.model;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class DetalleConsulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDetalle;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_consulta", nullable = false, foreignKey = @ForeignKey(name = "FK_detalle_consulta"))
     private Consulta consulta;

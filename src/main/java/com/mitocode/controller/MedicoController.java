@@ -81,7 +81,7 @@ public class MedicoController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id) throws Exception {
 		Medico obj = service.listarPorId(id);
-		if (obj.getIdMedico() == null){
+		if (obj == null){
 			throw new ModeloNotFoundException("ID NO ENCONTRADO " +  id);
 		}
 
