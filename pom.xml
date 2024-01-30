@@ -59,6 +59,14 @@
 			<dependency> <groupId>io.springfox</groupId> <artifactId>springfox-swagger-ui</artifactId>
 			<version>2.8.0</version> </dependency> -->
 
+		<!-- Hateoas - Nivel 3 Richardson -->
+<!--		TODO: se va trabajaar con la version 1.2.2, par versiones anteriores a 1.0  se manejan diferentes sintaxis o variian algunos, debes ver la verion de compatibilidad con spring-->
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.postgresql</groupId>

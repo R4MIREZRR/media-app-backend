@@ -4,6 +4,8 @@ import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Paciente;
 import com.mitocode.service.IPacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/pacientes")
@@ -28,12 +32,33 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> listarPorid(@PathVariable("id") Integer id) throws Exception {
+    public ResponseEntity<Paciente> listarPorId(@PathVariable("id") Integer id) throws Exception {
         Paciente obj = service.listarPorId(id);
         if (obj.getIdPaciente() == null){
             throw new ModeloNotFoundException("ID NO ENCONTRADO " +  id);
         }
         return new ResponseEntity<Paciente>(obj, HttpStatus.OK);
+
+    }
+
+    // TODO: 30/01/24 EntityModel -. pertenece a hateoas 
+    // TODO: 30/01/24 Este metodo está alineada con el nivel de madurez 3 de Richardson.
+    @GetMapping("/hateoas/{id}")
+    public EntityModel<Paciente> listarPorIdHateoas(@PathVariable("id") Integer id) throws Exception {
+        Paciente obj = service.listarPorId(id);
+
+        if (obj.getIdPaciente() == null) {
+            throw new ModeloNotFoundException("ID NO ENCONTRADO " + id);
+        }
+
+        // localhost:8080/pacientes/{id}
+        EntityModel<Paciente> recurso = EntityModel.of(obj);
+
+        WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).listarPorId(id));
+
+        recurso.add(link.withRel("paciente-recurso"));
+
+        return recurso;
 
     }
 
@@ -52,7 +77,7 @@ public class PacienteController {
     @PostMapping
     public ResponseEntity<Paciente> registrar(@Valid @RequestBody Paciente p) throws Exception {
         Paciente obj = service.registrar(p);
-        // TODO: 29/01/24 location ->  se arma: http://localhost:8080/pacientes/22 
+        // TODO: 29/01/24 location ->  se arma: http://localhost:8080/pacientes/22
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdPaciente()).toUri();
         return  ResponseEntity.created(location).build();
     }
