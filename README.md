@@ -4,8 +4,9 @@
 ##
 > Aqui se implemento el nivel de madurez 3 de Richardson al registrar : http://localhost:8080/pacientes/hateoas/1. Cuando se habla de HATEOAS (Hypermedia As The Engine Of Application State) en el contexto de servicios web y REST, se está refiriendo a la práctica de utilizar enlaces hipermedia para guiar y dirigir la interacción entre aplicaciones cliente y servidor. En este caso, "hipermedia" significa que los recursos expuestos por el servicio no solo proporcionan datos, sino también información sobre cómo interactuar con esos recursos a través de enlaces dinámicos. Esto permite una mayor autonomía y descubrimiento por parte del cliente.
 
-> Aqui se agrego BASICA de la impl de Medico y todas sus rutas y se probo y funciona
+> REFACTORIZACION 1 - Aqui se agrego  de la impl basica de Medico y todas sus rutas y se probo y funciona
 
+> REFACTORIZACION 2 -Aqui se agrego ICRUD para tener una clase service para las interfaces comunes
 ### Anteriores Commit
 > Resumen de Práctica en Richardson Maturity Level 2
 En este código, se utiliza ServletUriComponentsBuilder.fromCurrentRequest() para obtener el PATH actual y luego se construye y expande con el ID del paciente. Esta práctica está alineada con el nivel de madurez 2 de Richardson. Según esta teoría, se adopta la práctica de enviar una ruta en el encabezado (header) que permita consultar el registro recién creado.
